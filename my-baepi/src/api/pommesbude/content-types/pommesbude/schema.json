@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pommesbuden",
+  "info": {
+    "singularName": "pommesbude",
+    "pluralName": "pommesbuden",
+    "displayName": "Pommesbude"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}
