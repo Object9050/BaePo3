@@ -4,7 +4,8 @@
   "info": {
     "singularName": "pommesbude",
     "pluralName": "pommesbuden",
-    "displayName": "Pommesbude"
+    "displayName": "Pommesbude",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,6 +16,38 @@
       "type": "string",
       "unique": true,
       "required": true
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "pommesbuden"
+    },
+    "Photo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Address": {
+      "type": "string"
+    },
+    "GMapsLink": {
+      "type": "string"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "pommesbude"
     }
   }
 }
