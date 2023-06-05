@@ -68,7 +68,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./nextjs:/opt/app
+      - ./nextjs:/app
     networks:
       - strapi 
 
