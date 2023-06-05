@@ -60,17 +60,17 @@ services:
       - "5050:80"
     networks:
       - strapi
-
-  nextjs:
-    container_name: nextjs
-    build: ./nextjs
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./nextjs:/app
-    networks:
-      - strapi 
+#Zu Production wieder reinkommentieren:
+  # nextjs:
+  #   container_name: nextjs_dev
+  #   build: ./nextjs
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./nextjs:/opt/app
+  #   networks:
+  #     - strapi 
 
 volumes:
   strapi-data:
