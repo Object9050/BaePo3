@@ -46,7 +46,7 @@ const PommesList = ({ pommes }) => {
           >
             Weiter
           </button>
-          <span>{`${pageIndex} of ${
+          <span>{`${pageIndex} von ${
             data && data.meta.pagination.pageCount
           }`}
           </span>
