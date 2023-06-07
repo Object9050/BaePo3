@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetcher } from "../../lib/api";
+import { fetcher } from "../lib/api";
 import Layout from "../components/Layout";
 import Pommesbuden from "../components/Pommesbuden";
 import useSWR from 'swr';
