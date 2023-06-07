@@ -17,8 +17,8 @@ const Nav = () => {
             </Link>
           </li>
           <li>
-            <Link href="/pommes-tipps" className="text-black font-bold text-lg">
-                Pommes-Tipps
+            <Link href="/pommesbuden" className="text-black font-bold text-lg">
+                Pommesbuden
             </Link>
           </li>
           <li>
