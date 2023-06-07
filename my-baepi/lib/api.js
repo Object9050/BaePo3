@@ -1,3 +1,4 @@
+// Wrapper around fetch api
 export async function fetcher(url, options ={}) {
     let response;
     if (!options) {
