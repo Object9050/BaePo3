@@ -62,7 +62,7 @@ services:
       - strapi
 #Zu Production wieder reinkommentieren:
   nextjs:
-    container_name: nextjs_dev
+    container_name: nextjs
     build: ./nextjs
     restart: unless-stopped
     ports:
