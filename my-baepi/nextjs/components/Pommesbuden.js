@@ -8,7 +8,7 @@ const Pommesbuden = ({ pommes }) => {
           pommes.data.map((pommes) => {
             return (
               <li key={pommes.id}>
-                <Link href={`pommesbuden/` + pommes.id}>{pommes.attributes.Name}</Link>
+                <Link href={`pommesbuden/` + pommes.id}>{pommes.attributes.title}</Link>
               </li>
             );
           })}
