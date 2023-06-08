@@ -14,8 +14,9 @@ const Pommesbude = ({ pommes }) => {
 }
 
 export async function getServerSideProps({ params }) {
+    // Extracting slug from params (has to be the same as the [folderName] ie "slug")
     const { slug } = params;
-    const pommesResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden/${slug}`);
+    const pommesResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?filters[slug][$eq]=${slug}`);
     return {
         props: {
             pommes: pommesResponse.data
