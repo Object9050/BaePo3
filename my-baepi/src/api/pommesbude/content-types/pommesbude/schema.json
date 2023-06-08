@@ -12,12 +12,12 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "title": {
       "type": "string",
       "unique": true,
       "required": true
     },
-    "Description": {
+    "description": {
       "type": "richtext"
     },
     "categories": {
@@ -26,7 +26,7 @@
       "target": "api::category.category",
       "mappedBy": "pommesbuden"
     },
-    "Photo": {
+    "pictures": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -37,10 +37,10 @@
         "audios"
       ]
     },
-    "Address": {
+    "address": {
       "type": "string"
     },
-    "GMapsLink": {
+    "gmaps": {
       "type": "string"
     },
     "reviews": {
@@ -48,6 +48,10 @@
       "relation": "oneToMany",
       "target": "api::review.review",
       "mappedBy": "pommesbude"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }
