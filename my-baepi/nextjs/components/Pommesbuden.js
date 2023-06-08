@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Pommesbuden = ({ pommes }) => {
   return (
     <>
@@ -6,7 +8,7 @@ const Pommesbuden = ({ pommes }) => {
           pommes.data.map((pommes) => {
             return (
               <li key={pommes.id}>
-                <a href={`pommesbuden/` + pommes.id}>{pommes.attributes.Name}</a>
+                <Link href={`pommesbuden/` + pommes.id}>{pommes.attributes.Name}</Link>
               </li>
             );
           })}
