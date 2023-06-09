@@ -1,42 +1,31 @@
-import React from "react";
 import Link from "next/link";
+import { useState } from "react";
+import { setToken } from "../lib/auth";
 
 const Nav = () => {
-  return (
-    <nav className="bg-yellow-300">
-      <div className="container mx-auto px-4">
-        <ul className="flex items-center justify-between py-4">
-          <li>
-            <Link href="/" className="text-white font-bold text-lg">
-                <img src="images\logo.png" alt="Logo" className="logo" />
-            </Link>
-          </li>
-          <li>
-            <Link href="/" className="text-black font-bold text-lg">
-                Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/pommesbuden" className="text-black font-bold text-lg">
-                Pommesbuden
-            </Link>
-          </li>
-          <li>
-            <Link href="/user" className="text-black font-bold text-lg">
-                User
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <style jsx>{`
-        .logo {
-          display: block;
-          margin: 0 auto;
-          max-width: 150px; /* Anpassen der Breite des Logos */
-        }
-      `}</style>
-    </nav>
-  );
+  const [data, setData] = useState({
+    identifier: "",
+    password: "",
+  });
+  // authentication function on login submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Sending a http POST-request to Strapi with username and password
+    const response = await fetcher(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`,
+      {
+        method: "POST",
+        header: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          identifier: data.identifier,
+          password: data.password,
+        }),
+      }
+    );
+    setToken(data);
+  };
 };
 
 export default Nav;
