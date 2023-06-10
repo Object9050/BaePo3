@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { setToken, unsetToken } from "../lib/auth";
+import { fetcher } from '../lib/api';
+import { useUser } from "../lib/authContext";
+
 
 const Nav = () => {
   const [data, setData] = useState({
@@ -8,15 +11,17 @@ const Nav = () => {
     password: "",
   });
 
+  const { user, loading } = useUser();
+
   // authentication function on login submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Sending a http POST-request to Strapi with username and password
-    const response = await fetcher(
+    const responseData = await fetcher(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`,
       {
         method: "POST",
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -24,16 +29,22 @@ const Nav = () => {
           password: data.password,
         }),
       }
-    );
-    setToken(data);
-  };
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+      );
+      setToken(responseData);
+    };
+    const handleChange = (e) => {
+      setData({ ...data, [e.target.name]: e.target.value });
+      
+    const logout = (e) => {
+      unsetToken();
+    };
+
+    };
+
   return (
     <nav
       className="
-        flex-wrap
+        flex flex-wrap
         items-center
         justify-between
         w-full
@@ -49,13 +60,28 @@ const Nav = () => {
             <img
               className="m-3"
               src="/logo.png"
-              width={200}
+              width={100}
               height={50}
               alt="BaePo Logo"
             />
         </Link>
       </div>
-      
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        id="menu-button"
+        className="h-6 w-6 cursor-pointer md:hidden block"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        /> 
+      </svg>
+
       <div
         className="hidden w-full md:flex md:items-center md:w-auto"
         id="menu"
@@ -76,19 +102,80 @@ const Nav = () => {
             </Link>
           </li>
           <li>
-            <Link href"/pommesbuden"
-              className="md:p-2 py-2 block hover:text-purple-400" href="#">
-                pommesbuden
+            <Link href="/pommesbuden"
+              className="md:p-2 py-2 block hover:text-purple-400">
+                Pommesbuden
             </Link>
           </li>
+          {!loading &&
+            (user ? (
+              <li>
+                <Link href="profile"
+                  className="md:p-2 py-2 block hover:text-purple-400">
+                    Profile
+                </Link>
+              </li>
+            ) : (
+              ''
+            ))}
+          {!loading &&
+            (user ? (
+              <li>
+                <a
+                  className="md:p-2 py-2 block hover:text-purple-400"
+                  onClick={logout}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Logout
+                </a>
+              </li>
+            ) : (
+              ''
+            ))}
+          {!loading && !user ? (
+            <>
+              <li>
+                <form onSubmit={handleSubmit} className="form-inline">
+                  <input
+                    type="text"
+                    name="identifier"
+                    onChange={handleChange}
+                    placeholder="Username"
+                    className="md:p-2 form-input py-2 rounded mx-2"
+                    required
+                  />
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    placeholder="Passwort"
+                    className="md:p-2 form-input py-2 rounded mx-2"
+                    required
+                  />
+                
+                  <button
+                    className="md:p-2 rounded py-2 text-black bg-purple-200 p-2"
+                    type="submit"
+                  >
+                    Login
+                  </button>
+                </form>
+              </li>
+              <li>
+                <Link href="/signup"
+                  className="md:p-2 py-2 block hover:text-purple-400 text-black">
+                    Sign-Up
+                </Link>
+              </li>
+            </>
+          ) : (
+            ''
+          )}
         </ul>
       </div>
     </nav>
   );
 };
 
-const logout = (e) => {
-  unsetToken();
-};
 
 export default Nav;
