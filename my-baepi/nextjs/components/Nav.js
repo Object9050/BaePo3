@@ -46,7 +46,6 @@ const Nav = () => {
     >
       <div>
         <Link href="/" passHref>
-          <a>
             <img
               className="m-3"
               src="/logo.png"
@@ -54,7 +53,6 @@ const Nav = () => {
               height={50}
               alt="BaePo Logo"
             />
-          </a>
         </Link>
       </div>
       
@@ -79,7 +77,9 @@ const Nav = () => {
           </li>
           <li>
             <Link href"/pommesbuden"
-              className
+              className="md:p-2 py-2 block hover:text-purple-400" href="#">
+                pommesbuden
+            </Link>
           </li>
         </ul>
       </div>
