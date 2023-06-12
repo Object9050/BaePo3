@@ -46,7 +46,7 @@ const Pommesbude = ({ pommes, jwt }) => {
   return (
     <Layout user={user}>
       <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-4">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-400 py-2">
           {pommes.attributes.title}
         </span>
       </h1>
@@ -68,12 +68,12 @@ const Pommesbude = ({ pommes, jwt }) => {
       {user && (
         <>
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
               Bewertungen
             </span>
             <form onSubmit={handleSubmit}>
               <textarea
-                className="w-full text-sm px-3 py-2 text-gray-700 border border-2 border-teal-400 rounded-lg focus:outline-none"
+                className="w-full text-sm px-3 py-2 text-gray-700 border border-2 border-orange-400 rounded-lg focus:outline-none"
                 rows="4"
                 value={review.value}
                 onChange={handleChange}
@@ -95,7 +95,7 @@ const Pommesbude = ({ pommes, jwt }) => {
               pommes.attributes.reviews.data.map((review) => {
                 return (
                   <li key={review.id}>
-                    <span className="bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
+                    <span className="text-orange-500 bg-clip-text text-transparent">
                       {review.attributes.reviewer}
                     </span>{" "}
                     sagt: &quot;{review.attributes.review}&quot;
