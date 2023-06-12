@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "title": {
       "type": "string",
       "unique": true,
       "required": true
@@ -48,6 +48,10 @@
       "relation": "oneToMany",
       "target": "api::review.review",
       "mappedBy": "pommesbude"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }
