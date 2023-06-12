@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-06-12T08:18:16.562Z"
+    "x-generation-date": "2023-06-12T13:42:56.701Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -928,10 +928,10 @@
                                   "attributes": {
                                     "type": "object",
                                     "properties": {
-                                      "Review": {
+                                      "review": {
                                         "type": "string"
                                       },
-                                      "Reviewer": {
+                                      "reviewer": {
                                         "type": "string"
                                       },
                                       "pommesbude": {
@@ -1962,10 +1962,10 @@
                                                 "attributes": {
                                                   "type": "object",
                                                   "properties": {
-                                                    "Review": {
+                                                    "review": {
                                                       "type": "string"
                                                     },
-                                                    "Reviewer": {
+                                                    "reviewer": {
                                                       "type": "string"
                                                     },
                                                     "pommesbude": {
@@ -2397,10 +2397,10 @@
           "data": {
             "type": "object",
             "properties": {
-              "Review": {
+              "review": {
                 "type": "string"
               },
-              "Reviewer": {
+              "reviewer": {
                 "type": "string"
               },
               "pommesbude": {
@@ -2467,10 +2467,10 @@
       "Review": {
         "type": "object",
         "properties": {
-          "Review": {
+          "review": {
             "type": "string"
           },
-          "Reviewer": {
+          "reviewer": {
             "type": "string"
           },
           "pommesbude": {
@@ -3225,10 +3225,10 @@
                                 "attributes": {
                                   "type": "object",
                                   "properties": {
-                                    "Review": {
+                                    "review": {
                                       "type": "string"
                                     },
-                                    "Reviewer": {
+                                    "reviewer": {
                                       "type": "string"
                                     },
                                     "pommesbude": {

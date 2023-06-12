@@ -12,10 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Review": {
+    "review": {
       "type": "text"
     },
-    "Reviewer": {
+    "reviewer": {
       "type": "string"
     },
     "pommesbude": {
