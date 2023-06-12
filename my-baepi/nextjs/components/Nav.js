@@ -97,13 +97,13 @@ const Nav = () => {
         >
           <li>
             <Link href="/"
-              className="md:p-2 py-2 block hover:text-purple-400">
+              className="md:p-2 py-2 block hover:text-orange-400">
                 Home
             </Link>
           </li>
           <li>
             <Link href="/pommesbuden"
-              className="md:p-2 py-2 block hover:text-purple-400">
+              className="md:p-2 py-2 block hover:text-orange-400">
                 Pommesbuden
             </Link>
           </li>
@@ -111,7 +111,7 @@ const Nav = () => {
             (user ? (
               <li>
                 <Link href="profile"
-                  className="md:p-2 py-2 block hover:text-purple-400">
+                  className="md:p-2 py-2 block hover:text-orange-400">
                     Profile
                 </Link>
               </li>
@@ -122,7 +122,7 @@ const Nav = () => {
             (user ? (
               <li>
                 <a
-                  className="md:p-2 py-2 block hover:text-purple-400"
+                  className="md:p-2 py-2 block hover:text-orange-400"
                   onClick={logout}
                   style={{ cursor: 'pointer' }}
                 >
@@ -154,7 +154,7 @@ const Nav = () => {
                   />
                 
                   <button
-                    className="md:p-2 rounded py-2 text-black bg-purple-200 p-2"
+                    className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
                     type="submit"
                   >
                     Login
@@ -163,7 +163,7 @@ const Nav = () => {
               </li>
               <li>
                 <Link href="/signup"
-                  className="md:p-2 py-2 block hover:text-purple-400 text-black">
+                  className="md:p-2 py-2 block hover:text-orange-400 text-black">
                     Sign-Up
                 </Link>
               </li>

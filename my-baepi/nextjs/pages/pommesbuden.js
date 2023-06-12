@@ -26,8 +26,8 @@ const PommesList = ({ pommes }) => {
         {/* Pagination Nav Buttons */}
         <div className="space-x-2 space-y-2">
           <button
-            className={`md:p-2 rounded py-2 text-black text-white p-2 ${
-              pageIndex === 1 ? 'bg-gray-300' : 'bg-blue-400'
+            className={`md:p-2 rounded py-2 text-black p-2 ${
+              pageIndex === 1 ? 'bg-gray-300 text-white' : 'bg-yellow-300'
             }`}
             disabled={pageIndex === 1}
             onClick={() => setPageIndex(pageIndex -1)}
@@ -36,10 +36,9 @@ const PommesList = ({ pommes }) => {
             Zurück
           </button>
           <button
-            className={`md:p-2 rounded py-2 text-black text-white p-2 ${
+            className={`md:p-2 rounded py-2 text-black p-2 ${
               pageIndex === (data && data.meta.pagination.pageCount)
-               ? 'bg-gray-300' 
-               : 'bg-blue-400'
+               ? 'bg-gray-300 text-white' : 'bg-yellow-300'
             }`}
             disabled={pageIndex === (data && data.meta.pagination.pageCount)}
             onClick={() => setPageIndex(pageIndex +1)}
