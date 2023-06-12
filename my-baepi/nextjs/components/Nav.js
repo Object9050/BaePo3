@@ -34,11 +34,10 @@ const Nav = () => {
     };
     const handleChange = (e) => {
       setData({ ...data, [e.target.name]: e.target.value });
-      
+    };
+    
     const logout = (e) => {
       unsetToken();
-    };
-
     };
 
   return (

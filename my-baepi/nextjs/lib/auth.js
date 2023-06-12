@@ -21,9 +21,9 @@ export const unsetToken = () => {
   if (typeof window === "undefined") {
     return;
   }
-  Cookies.remove("id", data.user.id);
-  Cookies.remove("username", data.user.username);
-  Cookies.remove("jwt", data.jwt);
+  Cookies.remove("id");
+  Cookies.remove("username");
+  Cookies.remove("jwt");
 
   Router.reload('/');
 };

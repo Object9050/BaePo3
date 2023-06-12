@@ -2,9 +2,10 @@ import React from "react";
 import Head from "next/head";
 import Nav from "./Nav";
 import Footer from "./Footer";
+import { UserProvider } from "../lib/authContext";
 
-const Layout = ({ children }) => (
-  <>
+const Layout = ({ user, loading = false, children }) => (
+  <UserProvider value={{ user, loading }}>
     <Head>
       <title>BaePo - Best Pommes in Town!</title>
     </Head>
@@ -28,7 +29,7 @@ const Layout = ({ children }) => (
       </div>
     </main>
     <Footer />
-  </>
+  </UserProvider>
 );
 
 export default Layout;
