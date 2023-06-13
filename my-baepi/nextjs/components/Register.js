@@ -65,7 +65,7 @@ const Register = () => {
           </div>
           <div className="flex flex-col mb-4 md:w-full">
             <label className="font-bold text-lg mb-2" htmlFor="email">
-              Email
+              E-Mail
             </label>
             <input
               className="border-2 py-2 px-3"
@@ -77,7 +77,7 @@ const Register = () => {
           </div>
           <div className="flex flex-col mb-6 md:w-full">
             <label className="font-bold text-lg mb-2" htmlFor="password">
-              Password
+              Passwort
             </label>
             <input
               className="border-2 py-2 px-3"
