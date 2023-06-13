@@ -51,12 +51,17 @@ const Pommesbude = ({ pommes, jwt, description }) => {
           {pommes.attributes.title}
         </span>
       </h1>
-      {/* <p>
-        Beschreibung{" "}
-        <span className="bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-          {pommes.attributes.description}
-        </span>
-      </p> */}
+      {pommes.attributes.photo.data.length > 0 && (
+        <div>
+          {pommes.attributes.photo.data.map((photo) => (
+            <img
+              key={photo.id}
+              src={`${process.env.IMG_URL}${photo.attributes.url}`}
+              alt={photo.attributes.alternativeText}
+            />
+          ))}
+        </div>
+      )}
       <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
           Beschreibung
@@ -126,12 +131,14 @@ export async function getServerSideProps({ req, params }) {
         }
       : ""
   );
-  const description = await markdownToHtml(pommesResponse.data.attributes.description);
+  const description = await markdownToHtml(
+    pommesResponse.data.attributes.description
+  );
   return {
     props: {
       pommes: pommesResponse.data,
       description,
-      jwt: jwt ? jwt: '',
+      jwt: jwt ? jwt : "",
     },
   };
 }
