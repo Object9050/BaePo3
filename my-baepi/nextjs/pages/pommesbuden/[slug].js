@@ -52,10 +52,15 @@ const Pommesbude = ({ pommes, jwt, description }) => {
         </span>
       </h1>
       {pommes.attributes.photo.data.length > 0 && (
-        <img
-          src={`${process.env.IMG_URL}${pommes.attributes.photo.data[0].attributes.url}`}
-          alt={pommes.attributes.photo.data[0].attributes.alternativeText}
-        />
+        <div>
+          {pommes.attributes.photo.data.map((photo) => (
+            <img
+              key={photo.id}
+              src={`${process.env.IMG_URL}${photo.attributes.url}`}
+              alt={photo.attributes.alternativeText}
+            />
+          ))}
+        </div>
       )}
       <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
