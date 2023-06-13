@@ -161,7 +161,7 @@ const Nav = () => {
                 </form>
               </li>
               <li>
-                <Link href="/signup"
+                <Link href="/register"
                   className="md:p-2 py-2 block hover:text-orange-400 text-black">
                     Sign-Up
                 </Link>

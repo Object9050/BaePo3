@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-06-13T08:44:54.354Z"
+    "x-generation-date": "2023-06-13T09:06:15.320Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -535,7 +535,7 @@
                             }
                           }
                         },
-                        "Photo": {
+                        "photo": {
                           "type": "object",
                           "properties": {
                             "data": {
@@ -908,10 +908,10 @@
                             }
                           }
                         },
-                        "Address": {
+                        "address": {
                           "type": "string"
                         },
-                        "GMapsLink": {
+                        "gmaps": {
                           "type": "string"
                         },
                         "reviews": {
@@ -1162,7 +1162,7 @@
                   "example": "string or id"
                 }
               },
-              "Photo": {
+              "photo": {
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -1176,10 +1176,10 @@
                   "example": "string or id"
                 }
               },
-              "Address": {
+              "address": {
                 "type": "string"
               },
-              "GMapsLink": {
+              "gmaps": {
                 "type": "string"
               },
               "reviews": {
@@ -1318,7 +1318,7 @@
                                           }
                                         }
                                       },
-                                      "Photo": {
+                                      "photo": {
                                         "type": "object",
                                         "properties": {
                                           "data": {
@@ -1942,10 +1942,10 @@
                                           }
                                         }
                                       },
-                                      "Address": {
+                                      "address": {
                                         "type": "string"
                                       },
-                                      "GMapsLink": {
+                                      "gmaps": {
                                         "type": "string"
                                       },
                                       "reviews": {
@@ -2147,7 +2147,7 @@
               }
             }
           },
-          "Photo": {
+          "photo": {
             "type": "object",
             "properties": {
               "data": {
@@ -2289,10 +2289,10 @@
               }
             }
           },
-          "Address": {
+          "address": {
             "type": "string"
           },
-          "GMapsLink": {
+          "gmaps": {
             "type": "string"
           },
           "reviews": {
@@ -2832,7 +2832,7 @@
                           }
                         }
                       },
-                      "Photo": {
+                      "photo": {
                         "type": "object",
                         "properties": {
                           "data": {
@@ -3205,10 +3205,10 @@
                           }
                         }
                       },
-                      "Address": {
+                      "address": {
                         "type": "string"
                       },
-                      "GMapsLink": {
+                      "gmaps": {
                         "type": "string"
                       },
                       "reviews": {

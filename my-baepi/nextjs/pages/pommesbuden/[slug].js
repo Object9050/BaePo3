@@ -58,7 +58,7 @@ const Pommesbude = ({ pommes, jwt, description }) => {
         </span>
       </p> */}
       <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
           Beschreibung
         </span>
       </h2>

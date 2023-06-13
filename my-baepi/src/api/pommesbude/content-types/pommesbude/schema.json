@@ -26,7 +26,7 @@
       "target": "api::category.category",
       "mappedBy": "pommesbuden"
     },
-    "Photo": {
+    "photo": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -37,10 +37,10 @@
         "audios"
       ]
     },
-    "Address": {
+    "address": {
       "type": "string"
     },
-    "GMapsLink": {
+    "gmaps": {
       "type": "string"
     },
     "reviews": {
