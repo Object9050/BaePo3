@@ -8,8 +8,9 @@ import {
 } from "../../lib/auth";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import markdownToHtml from "../../lib/markdownToHtml";
 
-const Pommesbude = ({ pommes, jwt }) => {
+const Pommesbude = ({ pommes, jwt, description }) => {
   const router = useRouter();
   const { user, loading } = useFetchUser();
   const [review, setReview] = useState({
@@ -53,18 +54,18 @@ const Pommesbude = ({ pommes, jwt }) => {
       {/* <p>
         Beschreibung{" "}
         <span className="bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-          {pommes.attributes.Description}
+          {pommes.attributes.description}
         </span>
       </p> */}
-      {/* <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
+      <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
-          Plot
+          Beschreibung
         </span>
-      </h2> */}
-      {/* <div
+      </h2>
+      <div
         className="tracking-wide font-normal text-sm"
-        dangerouslySetInnerHTML={{ __html: plot }}
-      ></div> */}
+        dangerouslySetInnerHTML={{ __html: description }}
+      ></div>
       {user && (
         <>
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
@@ -95,7 +96,7 @@ const Pommesbude = ({ pommes, jwt }) => {
               pommes.attributes.reviews.data.map((review) => {
                 return (
                   <li key={review.id}>
-                    <span className="text-orange-500 bg-clip-text text-transparent">
+                    <span className="text-orange-500 bg-clip-text">
                       {review.attributes.reviewer}
                     </span>{" "}
                     sagt: &quot;{review.attributes.review}&quot;
@@ -125,9 +126,11 @@ export async function getServerSideProps({ req, params }) {
         }
       : ""
   );
+  const description = await markdownToHtml(pommesResponse.data.attributes.description);
   return {
     props: {
       pommes: pommesResponse.data,
+      description,
       jwt: jwt ? jwt: '',
     },
   };
