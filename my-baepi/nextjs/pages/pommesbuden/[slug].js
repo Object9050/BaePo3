@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import markdownToHtml from "../../lib/markdownToHtml";
 
-const Pommesbude = ({ pommes, jwt, description }) => {
+const Pommesbude = ({ pommes, jwt, description, photos }) => {
   const router = useRouter();
   const { user, loading } = useFetchUser();
   const [review, setReview] = useState({
@@ -51,9 +51,9 @@ const Pommesbude = ({ pommes, jwt, description }) => {
           {pommes.attributes.title}
         </span>
       </h1>
-      {pommes.attributes.photo.data.length > 0 && (
+      {photos.length > 0 && (
         <div>
-          {pommes.attributes.photo.data.map((photo) => (
+          {photos.map((photo) => (
             <img
               key={photo.id}
               src={`${process.env.IMG_URL}${photo.attributes.url}`}
@@ -137,6 +137,7 @@ export async function getServerSideProps({ req, params }) {
   return {
     props: {
       pommes: pommesResponse.data,
+      photos: pommesResponse.data.attributes.photo.data,
       description,
       jwt: jwt ? jwt : "",
     },
