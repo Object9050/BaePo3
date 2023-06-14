@@ -26,7 +26,7 @@ const Layout = ({ user, loading = false, children }) => (
             p-16
           "
         >
-          <div className="text-2x font-medium">{children}</div>
+          <div className="text-2xl font-medium">{children}</div>
         </div>
       </main>
       <Footer />
