@@ -167,7 +167,7 @@ const Nav = () => {
                   href="/register"
                   className="md:p-2 py-2 block hover:text-orange-400 text-black"
                 >
-                  Sign-Up
+                  Registrieren
                 </Link>
               </li>
             </>

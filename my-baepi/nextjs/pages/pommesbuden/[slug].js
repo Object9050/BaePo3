@@ -68,7 +68,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
         </span>
       </h2>
       <div
-        className="tracking-wide font-normal text-sm"
+        className="font-normal text-sm"
         dangerouslySetInnerHTML={{ __html: description }}
       ></div>
       {user && (

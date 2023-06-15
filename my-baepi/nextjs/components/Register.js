@@ -44,7 +44,7 @@ const Register = () => {
       <div className="w-full bg-white border-2 rounded p-8 m-4 md:max-w-sm md:mx-auto">
         <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-4">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-400 py-2">
-            Register
+            Sign-Up
           </span>
         </h1>
         <form
