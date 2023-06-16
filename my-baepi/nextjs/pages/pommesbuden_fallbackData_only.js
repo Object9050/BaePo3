@@ -15,7 +15,6 @@ const PommesList = ({ pommes2 }) => {
   //   fetcher, 
   //   {
   //     fallbackData: pommes2,
-  //     refreshInterval: 5000, // Verzögerung von 5 Sekunden
   //   }
   // );
     return (

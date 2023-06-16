@@ -5,13 +5,28 @@ import Pommesbuden from "../components/Pommesbuden";
 import useSWR from 'swr';
 import { useFetchUser } from "../lib/authContext";
 
+// Special Next.js function that pre-loads initial website data at build time.
+// Comes into effect as fallbackData in PommesList() and is shown before data 
+// is requested by users.
+export async function getStaticProps() {
+  const pommesResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=1&pagination[pageSize]=2`
+  );
+  return {
+    props: {
+      pommes2: pommesResponse,
+    },
+  };
+}
+
+// 
 const PommesList = ({ pommes2 }) => {
   const { user, loading } = useFetchUser();
 // Making pageIndex a variable through react's useState hook
 // setting the starting page to page 1
   const [pageIndex, setPageIndex] = useState(1);
   const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=${pageIndex}&pagination[pageSize]=5`, 
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=${pageIndex}&pagination[pageSize]=1`, 
     fetcher, 
     {
       fallbackData: pommes2,
@@ -24,6 +39,7 @@ const PommesList = ({ pommes2 }) => {
           Pommesbuden
           </span>
         </h1>
+        {/* Link to Pommesbuden component to show all Pommesbuden based on data fetched via useSWR */}
         <Pommesbuden pommes={data} />
         {/* Pagination Nav Buttons */}
         <div className="space-x-2 space-y-2">
@@ -58,13 +74,3 @@ const PommesList = ({ pommes2 }) => {
 
 export default PommesList;
 
-export async function getStaticProps() {
-  const pommesResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=1&pagination[pageSize]=2`
-  );
-  return {
-    props: {
-      pommes2: pommesResponse,
-    },
-  };
-}
