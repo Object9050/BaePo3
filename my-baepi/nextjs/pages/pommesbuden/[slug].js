@@ -10,6 +10,37 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import markdownToHtml from "../../lib/markdownToHtml";
 
+export async function getServerSideProps({ req, params }) {
+  const jwt =
+    typeof window !== "undefined"
+      ? getTokenFromLocalCookie
+      : getTokenFromServerCookie(req);
+  const { slug } = params;
+  const pommesResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden/${slug}?populate=*`,
+    jwt
+      ? {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      : ""
+  );
+  const description = await markdownToHtml(
+    pommesResponse.data.attributes.description
+  );
+  return {
+    props: {
+      pommes: pommesResponse.data,
+      photos: pommesResponse.data.attributes.photo.data,
+      description,
+      jwt: jwt ? jwt : "",
+    },
+  };
+}
+
+export default Pommesbude;
+
 const Pommesbude = ({ pommes, jwt, description, photos }) => {
   const router = useRouter();
   const { user, loading } = useFetchUser();
@@ -51,7 +82,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
           {pommes.attributes.title}
         </span>
       </h1>
-      {photos.length > 0 && (
+      {photos ? (
         <div>
           {photos.map((photo) => (
             <img
@@ -61,7 +92,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
             />
           ))}
         </div>
-      )}
+      ): <div>Keine Fotos vorhanden</div>}
       <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
           Beschreibung
@@ -115,33 +146,3 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
   );
 };
 
-export async function getServerSideProps({ req, params }) {
-  const jwt =
-    typeof window !== "undefined"
-      ? getTokenFromLocalCookie
-      : getTokenFromServerCookie(req);
-  const { slug } = params;
-  const pommesResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden/${slug}?populate=*`,
-    jwt
-      ? {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      : ""
-  );
-  const description = await markdownToHtml(
-    pommesResponse.data.attributes.description
-  );
-  return {
-    props: {
-      pommes: pommesResponse.data,
-      photos: pommesResponse.data.attributes.photo.data,
-      description,
-      jwt: jwt ? jwt : "",
-    },
-  };
-}
-
-export default Pommesbude;
