@@ -1,5 +1,6 @@
 import Link from "next/link";
-
+// Creates a map of pommes.data and iterates through the map
+// creating links to all the Pommesbuden using the id as unique key
 const Pommesbuden = ({ pommes }) => {
   return (
     <>
@@ -8,7 +9,9 @@ const Pommesbuden = ({ pommes }) => {
           pommes.data.map((pommes) => {
             return (
               <li key={pommes.id}>
-                <Link href={`pommesbuden/` + pommes.id}>{pommes.attributes.title}</Link>
+                <Link href={`pommesbuden/` + pommes.id}>
+                  {pommes.attributes.title}
+                </Link>
               </li>
             );
           })}

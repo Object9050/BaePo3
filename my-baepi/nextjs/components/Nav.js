@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { setToken, unsetToken } from "../lib/auth";
-import { fetcher } from '../lib/api';
+import { fetcher } from "../lib/api";
 import { useUser } from "../lib/authContext";
-
 
 const Nav = () => {
   const [data, setData] = useState({
@@ -29,16 +28,16 @@ const Nav = () => {
           password: data.password,
         }),
       }
-      );
-      setToken(responseData);
-    };
-    const handleChange = (e) => {
-      setData({ ...data, [e.target.name]: e.target.value });
-    };
-    
-    const logout = (e) => {
-      unsetToken();
-    };
+    );
+    setToken(responseData);
+  };
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const logout = (e) => {
+    unsetToken();
+  };
 
   return (
     <nav
@@ -56,13 +55,13 @@ const Nav = () => {
     >
       <div>
         <Link href="/" passHref>
-            <img
-              className="m-3"
-              src="/logo.png"
-              width={100}
-              height={50}
-              alt="BaePo Logo"
-            />
+          <img
+            className="m-3"
+            src="/logo.png"
+            width={100}
+            height={50}
+            alt="BaePo Logo"
+          />
         </Link>
       </div>
       <svg
@@ -78,7 +77,7 @@ const Nav = () => {
           strokeLinejoin="round"
           strokeWidth="2"
           d="M4 6h16M4 12h16M4 18h16"
-        /> 
+        />
       </svg>
 
       <div
@@ -95,27 +94,30 @@ const Nav = () => {
           "
         >
           <li>
-            <Link href="/"
-              className="md:p-2 py-2 block hover:text-orange-400">
-                Home
+            <Link href="/" className="md:p-2 py-2 block hover:text-orange-400">
+              Home
             </Link>
           </li>
           <li>
-            <Link href="/pommesbuden"
-              className="md:p-2 py-2 block hover:text-orange-400">
-                Pommesbuden
+            <Link
+              href="/pommesbuden"
+              className="md:p-2 py-2 block hover:text-orange-400"
+            >
+              Pommesbuden
             </Link>
           </li>
           {!loading &&
             (user ? (
               <li>
-                <Link href="profile"
-                  className="md:p-2 py-2 block hover:text-orange-400">
-                    Profile
+                <Link
+                  href="/profile"
+                  className="md:p-2 py-2 block hover:text-orange-400"
+                >
+                  Profil
                 </Link>
               </li>
             ) : (
-              ''
+              ""
             ))}
           {!loading &&
             (user ? (
@@ -123,13 +125,13 @@ const Nav = () => {
                 <a
                   className="md:p-2 py-2 block hover:text-orange-400"
                   onClick={logout}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
                   Logout
                 </a>
               </li>
             ) : (
-              ''
+              ""
             ))}
           {!loading && !user ? (
             <>
@@ -151,7 +153,7 @@ const Nav = () => {
                     className="md:p-2 form-input py-2 rounded mx-2"
                     required
                   />
-                
+
                   <button
                     className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
                     type="submit"
@@ -161,20 +163,21 @@ const Nav = () => {
                 </form>
               </li>
               <li>
-                <Link href="/signup"
-                  className="md:p-2 py-2 block hover:text-orange-400 text-black">
-                    Sign-Up
+                <Link
+                  href="/register"
+                  className="md:p-2 py-2 block hover:text-orange-400 text-black"
+                >
+                  Registrieren
                 </Link>
               </li>
             </>
           ) : (
-            ''
+            ""
           )}
         </ul>
       </div>
     </nav>
   );
 };
-
 
 export default Nav;

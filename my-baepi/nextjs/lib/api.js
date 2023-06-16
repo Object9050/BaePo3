@@ -1,4 +1,4 @@
-// Wrapper around fetch api
+// Wrapper function around fetch-api to allow for options
 export async function fetcher(url, options ={}) {
     let response;
     if (!options) {
@@ -6,6 +6,6 @@ export async function fetcher(url, options ={}) {
     } else {
         response = await fetch(url, options);
     }
-    const data = await response.json();
-    return data;
+    const ApiData = await response.json();
+    return ApiData;
 }
