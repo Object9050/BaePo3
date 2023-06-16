@@ -22,7 +22,7 @@ export async function getStaticProps() {
 //
 const PommesList = ({ pommes2 }) => {
   const { user, loading } = useFetchUser();
-  // Making pageIndex a variable through react's useState hook
+  // Making pageIndex a variable through react's useState hook,
   // setting the starting page to page 1
   const [pageIndex, setPageIndex] = useState(1);
   const { data } = useSWR(
@@ -50,7 +50,6 @@ const PommesList = ({ pommes2 }) => {
           disabled={pageIndex === 1}
           onClick={() => setPageIndex(pageIndex - 1)}
         >
-          {" "}
           Zurück
         </button>
         <button
