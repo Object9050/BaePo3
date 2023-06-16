@@ -6,6 +6,6 @@ export async function fetcher(url, options ={}) {
     } else {
         response = await fetch(url, options);
     }
-    const data = await response.json();
-    return data;
+    const ApiData = await response.json();
+    return ApiData;
 }

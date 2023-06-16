@@ -1,6 +1,6 @@
 import Link from "next/link";
 // Creates a map of pommes.data and iterates through the map
-// displaying all Pommesbuden names using the id as unique key
+// creating links to all the Pommesbuden using the id as unique key
 const Pommesbuden = ({ pommes }) => {
   return (
     <>
