@@ -12,7 +12,7 @@ export const setToken = (data) => {
   Cookies.set("username", data.user.username);
   Cookies.set("jwt", data.jwt);
 
-  if (Cookies.get("username")) {
+  if (Cookies.get("username") == true) {
     Router.reload("/");
   }
 };

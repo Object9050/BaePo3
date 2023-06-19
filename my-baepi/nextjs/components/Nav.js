@@ -12,7 +12,7 @@ const Nav = () => {
 
   const { user, loading } = useUser();
 
-  // authentication function on login submit
+  // authentication function for the login of a user
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Sending a http POST-request to Strapi with username and password
@@ -31,6 +31,7 @@ const Nav = () => {
     );
     setToken(responseData);
   };
+  
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -107,6 +108,7 @@ const Nav = () => {
             </Link>
           </li>
           {!loading &&
+            // Inline conditional rendering. If user is logged in, show 'Profil' item
             (user ? (
               <li>
                 <Link
@@ -120,6 +122,7 @@ const Nav = () => {
               ""
             ))}
           {!loading &&
+            // Inline conditional rendering. If user is logged in, show 'Logout' item
             (user ? (
               <li>
                 <a
