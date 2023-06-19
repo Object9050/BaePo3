@@ -39,7 +39,6 @@ export async function getServerSideProps({ req, params }) {
   };
 }
 
-export default Pommesbude;
 
 const Pommesbude = ({ pommes, jwt, description, photos }) => {
   const router = useRouter();
@@ -47,7 +46,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
   const [review, setReview] = useState({
     value: "",
   });
-
+  
   const handleChange = (e) => {
     setReview({ value: e.target.value });
   };
@@ -74,7 +73,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
       console.error("Fehler bei der Anfrage", error);
     }
   };
-
+  
   return (
     <Layout user={user}>
       <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-4">
@@ -86,11 +85,11 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
         <div>
           {photos.map((photo) => (
             <img
-              key={photo.id}
-              src={`${process.env.IMG_URL}${photo.attributes.url}`}
-              alt={photo.attributes.alternativeText}
+            key={photo.id}
+            src={`${process.env.IMG_URL}${photo.attributes.url}`}
+            alt={photo.attributes.alternativeText}
             />
-          ))}
+            ))}
         </div>
       ): <div>Keine Fotos vorhanden</div>}
       <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
@@ -101,7 +100,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
       <div
         className="font-normal text-sm"
         dangerouslySetInnerHTML={{ __html: description }}
-      ></div>
+        ></div>
       {user && (
         <>
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
@@ -115,11 +114,11 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
                 value={review.value}
                 onChange={handleChange}
                 placeholder="Füge deine Bewertung hinzu"
-              ></textarea>
+                ></textarea>
               <button
                 className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
                 type="submit"
-              >
+                >
                 Bewertung hinzufügen
               </button>
             </form>
@@ -146,3 +145,4 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
   );
 };
 
+export default Pommesbude;

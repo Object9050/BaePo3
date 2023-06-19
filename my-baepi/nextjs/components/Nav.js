@@ -5,6 +5,9 @@ import { fetcher } from "../lib/api";
 import { useUser } from "../lib/authContext";
 
 const Nav = () => {
+  // React hook 'useState' declares variable 'data', initialises
+  // it with empty username (identifier) and password. Also
+  // creates 'setData' function which enables later 'data' alteration.
   const [data, setData] = useState({
     identifier: "",
     password: "",
@@ -12,8 +15,9 @@ const Nav = () => {
 
   const { user, loading } = useUser();
 
-  // authentication function for the login of a user
+  // authentication event-handler function for the login of a user
   const handleSubmit = async (e) => {
+    // prevents automatic reload of page after form submit
     e.preventDefault();
     // Sending a http POST-request to Strapi with username and password
     const responseData = await fetcher(
@@ -31,8 +35,10 @@ const Nav = () => {
     );
     setToken(responseData);
   };
-  
+
+  // Event-handler function for user input in username or password fields
   const handleChange = (e) => {
+    // creates a copy of 'data' and replaces the current values
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -55,7 +61,7 @@ const Nav = () => {
       "
     >
       <div>
-        <Link href="/" passHref>
+        <Link href="/">
           <img
             className="m-3"
             src="/logo.png"
@@ -65,22 +71,6 @@ const Nav = () => {
           />
         </Link>
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        id="menu-button"
-        className="h-6 w-6 cursor-pointer md:hidden block"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-
       <div
         className="hidden w-full md:flex md:items-center md:w-auto"
         id="menu"

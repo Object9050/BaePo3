@@ -1,6 +1,6 @@
-// When setting token, grab the data from the fetch API request
-// and put id, username, jwt in cookies. If login credentials fit
-// reload the page. On logout, remove the cookies and reload page.
+// On setToken, grab the data from the fetch API request
+// and put id, username, jwt in a cookie. If login credentials fit
+// reload the page. On logout, remove the cookie and reload page.
 import Router from "next/router";
 import Cookies from "js-cookie";
 
@@ -12,7 +12,7 @@ export const setToken = (data) => {
   Cookies.set("username", data.user.username);
   Cookies.set("jwt", data.jwt);
 
-  if (Cookies.get("username") == true) {
+  if (Cookies.get("username")) {
     Router.reload("/");
   }
 };
