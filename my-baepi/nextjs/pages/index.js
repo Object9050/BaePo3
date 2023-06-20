@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import { useFetchUser } from "../lib/authContext";
 
 export default function Home() {
-  const { user, loading } = useFetchUser();
+  const { user } = useFetchUser();
   return (
     <Layout user={user}>
       <h1 className="font-bold text-2xl mb-4">BaePo - Baest Pommes in Town!</h1>

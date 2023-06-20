@@ -5,15 +5,22 @@ import Router from "next/router";
 import Cookies from "js-cookie";
 
 export const setToken = (data) => {
-  if (typeof window === "undefined") {
+  // return nothing when data.user is undefined which happens
+  // when user login-data is incorrect
+  if (typeof window === "undefined" || !data.user) {
     return;
   }
+  
   Cookies.set("id", data.user.id);
   Cookies.set("username", data.user.username);
   Cookies.set("jwt", data.jwt);
 
   if (Cookies.get("username")) {
-    Router.reload("/");
+    try {
+      Router.reload("/");
+    } catch (error) {
+      console.error("Fehler beim Neuladen der Seite:", error);
+    }
   }
 };
 

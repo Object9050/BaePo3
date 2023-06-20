@@ -5,9 +5,9 @@ import { fetcher } from "../lib/api";
 import { useUser } from "../lib/authContext";
 
 const Nav = () => {
-  // React hook 'useState' declares variable 'data', initialises
-  // it with empty username (identifier) and password. Also
-  // creates 'setData' function which enables later 'data' alteration.
+  // React hook 'useState' declares variable 'credentials', initialises
+  // it with empty username (identifier) and password. Also creates 
+  // 'setCredentials' function which enables later 'credentials' alteration.
   const [credentials, setCredentials] = useState({
     identifier: "",
     password: "",
