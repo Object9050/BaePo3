@@ -1,45 +1,37 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { getUserFromLocalCookie } from "./auth";
 
-let userState;
+const UserContext = createContext();
 
-const User = createContext({ user: null, loading: false});
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-export const UserProvider = ({ value, children}) => {
-    const { user } = value;
+  useEffect(() => {
+    const fetchedUser = getUserFromLocalCookie();
+    setUser(fetchedUser);
+  }, []);
 
-    useEffect(() => {
-        if (!userState && user) {
-            userState = user;
-        }
-    }, []);
-
-    return <User.Provider value={value}>{children}</User.Provider>;
+  return (
+    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+  );
 };
 
-export const useUser = () => useContext(User);
+// Custom hook to make user from userContext available outside of this component
+export const useUser = () => useContext(UserContext);
 
 export const useFetchUser = () => {
-    const [data, setUser] = useState({
-        user: userState || null,
-        loading: userState === undefined,
-    });
-    useEffect(() => {
-        if (userState !== undefined) {
-            return;
-        }
+  const [userState, setUserState] = useState({
+    user: null,
+  });
 
-        let isMounted = true;
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = getUserFromLocalCookie();
+      setUserState({ user });
+    };
 
-        const user = getUserFromLocalCookie();
-        if (isMounted) {
-            setUser({ user, loading: false });
-        }
+    fetchUser();
+  }, []);
 
-        return () => {
-            isMounted = false;
-        };
-    }, []);
-
-    return data;
+  return userState;
 };

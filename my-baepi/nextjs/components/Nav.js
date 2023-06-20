@@ -8,12 +8,12 @@ const Nav = () => {
   // React hook 'useState' declares variable 'data', initialises
   // it with empty username (identifier) and password. Also
   // creates 'setData' function which enables later 'data' alteration.
-  const [data, setData] = useState({
+  const [credentials, setCredentials] = useState({
     identifier: "",
     password: "",
   });
 
-  const { user, loading } = useUser();
+  const { user } = useUser();
 
   // authentication event-handler function for the login of a user
   const handleSubmit = async (e) => {
@@ -28,8 +28,8 @@ const Nav = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          identifier: data.identifier,
-          password: data.password,
+          identifier: credentials.identifier,
+          password: credentials.password,
         }),
       }
     );
@@ -38,8 +38,9 @@ const Nav = () => {
 
   // Event-handler function for user input in username or password fields
   const handleChange = (e) => {
-    // creates a copy of 'data' and replaces the current values
-    setData({ ...data, [e.target.name]: e.target.value });
+    // creates a copy of 'credentials' (...='spread operator')
+    // and replaces the current values
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   const logout = (e) => {
@@ -61,7 +62,7 @@ const Nav = () => {
       "
     >
       <div>
-        <Link href="/">
+        <Link href="/" passHref>
           <img
             className="m-3"
             src="/logo.png"
@@ -71,6 +72,21 @@ const Nav = () => {
           />
         </Link>
       </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        id="menu-button"
+        className="h-6 w-6 cursor-pointer md:hidden block"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
       <div
         className="hidden w-full md:flex md:items-center md:w-auto"
         id="menu"
@@ -97,36 +113,38 @@ const Nav = () => {
               Pommesbuden
             </Link>
           </li>
-          {!loading &&
-            // Inline conditional rendering. If user is logged in, show 'Profil' item
-            (user ? (
-              <li>
-                <Link
-                  href="/profile"
-                  className="md:p-2 py-2 block hover:text-orange-400"
-                >
-                  Profil
-                </Link>
-              </li>
-            ) : (
-              ""
-            ))}
-          {!loading &&
-            // Inline conditional rendering. If user is logged in, show 'Logout' item
-            (user ? (
-              <li>
-                <a
-                  className="md:p-2 py-2 block hover:text-orange-400"
-                  onClick={logout}
-                  style={{ cursor: "pointer" }}
-                >
-                  Logout
-                </a>
-              </li>
-            ) : (
-              ""
-            ))}
-          {!loading && !user ? (
+          {/* Inline conditional rendering. If user is logged in, show 'Profil'
+          item */}
+          {user ? (
+            <li>
+              <Link
+                href="/profile"
+                className="md:p-2 py-2 block hover:text-orange-400"
+              >
+                Profil
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+          {/* Inline conditional rendering. If user is logged in, show 'Logout'
+          item */}
+          {user ? (
+            <li>
+              <a
+                className="md:p-2 py-2 block hover:text-orange-400"
+                onClick={logout}
+                style={{ cursor: "pointer" }}
+              >
+                Logout
+              </a>
+            </li>
+          ) : (
+            ""
+          )}
+          {/* Inline conditional rendering. If no user is logged in, 
+          show 'Login' and 'Registrieren' items and form */}
+          {!user ? (
             <>
               <li>
                 <form onSubmit={handleSubmit} className="form-inline">
