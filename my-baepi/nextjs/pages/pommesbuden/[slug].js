@@ -11,14 +11,11 @@ import { useState } from "react";
 import markdownToHtml from "../../lib/markdownToHtml";
 
 export async function getServerSideProps({ req, params }) {
-  // If code is executed in the browser-window getTokenFromLocalCookie
-  // otherwise if code is executed on the server, getTokenFromServerCookie.
   const jwt =
     typeof window !== "undefined"
       ? getTokenFromLocalCookie
       : getTokenFromServerCookie(req);
 
-  // Fetches the data for the specific Pommesbude based on the slug parameter
   const { slug } = params;
   const pommesResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden/${slug}?populate=*`,
@@ -31,7 +28,6 @@ export async function getServerSideProps({ req, params }) {
       : ""
   );
 
-  // Converts the markdown description to HTML
   const description = await markdownToHtml(
     pommesResponse.data.attributes.description
   );
@@ -53,12 +49,10 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
     value: "",
   });
 
-  // Event handler for updating the review value
   const handleChange = (e) => {
     setReview({ value: e.target.value });
   };
 
-  // Event handler for submitting the review
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -90,7 +84,6 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
         </span>
       </h1>
 
-      {/* Renders the photos if available */}
       {photos ? (
         <div>
           {photos.map((photo) => (
@@ -111,13 +104,11 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
         </span>
       </h2>
 
-      {/* Renders the description */}
       <div
         className="font-normal text-sm"
         dangerouslySetInnerHTML={{ __html: description }}
       ></div>
 
-      {/* Renders the reviews section if user is logged in */}
       {user && (
         <>
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
@@ -141,11 +132,9 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
             </form>
           </h2>
           <ul>
-            {/* Renders "Noch keine Bewertungen vorhanden." if there are no reviews */}
             {pommes.attributes.reviews.data.length === 0 && (
               <span>Noch keine Bewertungen vorhanden.</span>
             )}
-            {/* Renders each review */}
             {pommes.attributes.reviews &&
               pommes.attributes.reviews.data.map((review) => {
                 return (
@@ -159,6 +148,25 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
               })}
           </ul>
         </>
+      )}
+      {/* Display address and Google Maps link */}
+      {pommes.attributes.address && /* pommes.attributes.gmaps && */ (
+        <div>
+          <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
+              Adresse
+            </span>
+          </h2>
+          <div className="font-normal text-sm">
+            <a
+              href={pommes.attributes.gmaps}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {pommes.attributes.address}
+            </a>
+          </div>
+        </div>
       )}
     </Layout>
   );
