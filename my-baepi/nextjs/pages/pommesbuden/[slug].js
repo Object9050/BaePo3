@@ -109,6 +109,25 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
         dangerouslySetInnerHTML={{ __html: description }}
       ></div>
 
+      {/* Display address and Google Maps link */}
+      {pommes.attributes.address && (
+        <div>
+          <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
+              Adresse
+            </span>
+          </h2>
+          <div className="font-normal text-sm">
+            <a
+              href={pommes.attributes.gmaps}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {pommes.attributes.address}
+            </a>
+          </div>
+        </div>
+      )}
       {user && (
         <>
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
@@ -119,7 +138,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
           <form onSubmit={handleSubmit}>
             <textarea
               className="w-full text-sm px-3 py-2 text-gray-700 border border-2 border-orange-400 rounded-lg focus:outline-none"
-              rows="4"
+              rows="3"
               value={review.value}
               onChange={handleChange}
               placeholder="Füge deine Bewertung hinzu"
@@ -148,25 +167,6 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
               })}
           </ul>
         </>
-      )}
-      {/* Display address and Google Maps link */}
-      {pommes.attributes.address && (
-        /* pommes.attributes.gmaps && */ <div>
-          <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
-              Adresse
-            </span>
-          </h2>
-          <div className="font-normal text-sm">
-            <a
-              href={pommes.attributes.gmaps}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {pommes.attributes.address}
-            </a>
-          </div>
-        </div>
       )}
     </Layout>
   );
