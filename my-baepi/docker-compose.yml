@@ -43,7 +43,7 @@ services:
       POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - strapi-data:/var/lib/postgresql/data/ #using a volume
-      #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
+      # - ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
 
     ports:
       - "5432:5432"
@@ -61,17 +61,17 @@ services:
     networks:
       - strapi
 #Zu Production wieder reinkommentieren:
-  nextjs:
-    container_name: nextjs
-    build: ./nextjs
-    image: nextjs-baepo
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./nextjs:/opt/app
-    networks:
-      - strapi 
+  # nextjs:
+  #   container_name: nextjs
+  #   build: ./nextjs
+  #   image: nextjs-baepo
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./nextjs:/opt/app
+  #   networks:
+  #     - strapi 
 
 volumes:
   strapi-data:
