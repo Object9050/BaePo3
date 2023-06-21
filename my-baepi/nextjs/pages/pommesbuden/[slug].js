@@ -115,22 +115,22 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
               Bewertungen
             </span>
-            <form onSubmit={handleSubmit}>
-              <textarea
-                className="w-full text-sm px-3 py-2 text-gray-700 border border-2 border-orange-400 rounded-lg focus:outline-none"
-                rows="4"
-                value={review.value}
-                onChange={handleChange}
-                placeholder="Füge deine Bewertung hinzu"
-              ></textarea>
-              <button
-                className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
-                type="submit"
-              >
-                Bewertung hinzufügen
-              </button>
-            </form>
           </h2>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              className="w-full text-sm px-3 py-2 text-gray-700 border border-2 border-orange-400 rounded-lg focus:outline-none"
+              rows="4"
+              value={review.value}
+              onChange={handleChange}
+              placeholder="Füge deine Bewertung hinzu"
+            ></textarea>
+            <button
+              className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2 mb-4"
+              type="submit"
+            >
+              Bewertung hinzufügen
+            </button>
+          </form>
           <ul>
             {pommes.attributes.reviews.data.length === 0 && (
               <span>Noch keine Bewertungen vorhanden.</span>
@@ -150,8 +150,8 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
         </>
       )}
       {/* Display address and Google Maps link */}
-      {pommes.attributes.address && /* pommes.attributes.gmaps && */ (
-        <div>
+      {pommes.attributes.address && (
+        /* pommes.attributes.gmaps && */ <div>
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
               Adresse

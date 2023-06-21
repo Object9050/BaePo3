@@ -29,7 +29,7 @@ const PommesList = ({ pommes2 }) => {
   // useSWR monitors changes in the data and re-renders parts of the page when data changes. 
   // It uses fetcher() to retrieve the data and allows for a fallbackData option.
   const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=${pageIndex}&pagination[pageSize]=2&sort=id:ASC`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=${pageIndex}&pagination[pageSize]=3&sort=title:ASC`,
     fetcher,
     {
       fallbackData: pommes2,
