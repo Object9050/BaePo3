@@ -5,15 +5,19 @@ import { fetcher } from "../lib/api";
 import { useUser } from "../lib/authContext";
 
 const Nav = () => {
-  const [data, setData] = useState({
+  // React hook 'useState' declares variable 'credentials', initialises
+  // it with empty username (identifier) and password. Also creates 
+  // 'setCredentials' function which enables later 'credentials' alteration.
+  const [credentials, setCredentials] = useState({
     identifier: "",
     password: "",
   });
 
-  const { user, loading } = useUser();
+  const { user } = useUser();
 
-  // authentication function on login submit
+  // authentication event-handler function for the login of a user
   const handleSubmit = async (e) => {
+    // prevents automatic reload of page after form submit
     e.preventDefault();
     // Sending a http POST-request to Strapi with username and password
     const responseData = await fetcher(
@@ -24,15 +28,19 @@ const Nav = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          identifier: data.identifier,
-          password: data.password,
+          identifier: credentials.identifier,
+          password: credentials.password,
         }),
       }
     );
     setToken(responseData);
   };
+
+  // Event-handler function for user input in username or password fields
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    // creates a copy of 'credentials' (...='spread operator')
+    // and replaces the current values
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   const logout = (e) => {
@@ -79,7 +87,6 @@ const Nav = () => {
           d="M4 6h16M4 12h16M4 18h16"
         />
       </svg>
-
       <div
         className="hidden w-full md:flex md:items-center md:w-auto"
         id="menu"
@@ -106,34 +113,38 @@ const Nav = () => {
               Pommesbuden
             </Link>
           </li>
-          {!loading &&
-            (user ? (
-              <li>
-                <Link
-                  href="/profile"
-                  className="md:p-2 py-2 block hover:text-orange-400"
-                >
-                  Profil
-                </Link>
-              </li>
-            ) : (
-              ""
-            ))}
-          {!loading &&
-            (user ? (
-              <li>
-                <a
-                  className="md:p-2 py-2 block hover:text-orange-400"
-                  onClick={logout}
-                  style={{ cursor: "pointer" }}
-                >
-                  Logout
-                </a>
-              </li>
-            ) : (
-              ""
-            ))}
-          {!loading && !user ? (
+          {/* Inline conditional rendering. If user is logged in, show 'Profil'
+          item */}
+          {user ? (
+            <li>
+              <Link
+                href="/profile"
+                className="md:p-2 py-2 block hover:text-orange-400"
+              >
+                Profil
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+          {/* Inline conditional rendering. If user is logged in, show 'Logout'
+          item */}
+          {user ? (
+            <li>
+              <a
+                className="md:p-2 py-2 block hover:text-orange-400"
+                onClick={logout}
+                style={{ cursor: "pointer" }}
+              >
+                Logout
+              </a>
+            </li>
+          ) : (
+            ""
+          )}
+          {/* Inline conditional rendering. If no user is logged in, 
+          show 'Login' and 'Registrieren' items and form */}
+          {!user ? (
             <>
               <li>
                 <form onSubmit={handleSubmit} className="form-inline">

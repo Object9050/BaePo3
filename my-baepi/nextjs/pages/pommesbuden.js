@@ -22,14 +22,14 @@ export async function getStaticProps() {
 // Displays all the Pommesbuden with pagination buttons. Extracts 
 // pommes2 prop from getStaticProps and uses it as fallbackData.
 const PommesList = ({ pommes2 }) => {
-  const { user, loading } = useFetchUser();
+  const { user } = useFetchUser();
   // Making pageIndex a variable through react's useState hook,
   // setting the starting page to page 1
   const [pageIndex, setPageIndex] = useState(1);
   // useSWR monitors changes in the data and re-renders parts of the page when data changes. 
   // It uses fetcher() to retrieve the data and allows for a fallbackData option.
   const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=${pageIndex}&pagination[pageSize]=2&sort=id:ASC`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=${pageIndex}&pagination[pageSize]=3&sort=title:ASC`,
     fetcher,
     {
       fallbackData: pommes2,

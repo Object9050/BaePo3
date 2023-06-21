@@ -3,9 +3,9 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import { UserProvider } from "../lib/authContext";
 
-const Layout = ({ user, loading = false, children }) => {
+const Layout = ({ user, children }) => {
   return (
-    <UserProvider value={{ user, loading }}>
+    <UserProvider value={{ user }}>
       <Head>
         <title>BaePo - Baest Pommes in Town!</title>
       </Head>

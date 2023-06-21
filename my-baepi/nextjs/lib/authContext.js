@@ -1,45 +1,44 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { getUserFromLocalCookie } from "./auth";
 
-let userState;
+// Creates a context (react-function) with initial value of undefined
+const UserContext = createContext();
 
-const User = createContext({ user: null, loading: false});
+// the UserProvider component initializes the user state and fetches the user 
+// data using the getUserFromLocalCookie function. It then provides the user 
+// value to its descendant components using the UserContext.Provider component.
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-export const UserProvider = ({ value, children}) => {
-    const { user } = value;
+  useEffect(() => {
+    const fetchedUser = getUserFromLocalCookie();
+    setUser(fetchedUser);
+  }, []);
 
-    useEffect(() => {
-        if (!userState && user) {
-            userState = user;
-        }
-    }, []);
-
-    return <User.Provider value={value}>{children}</User.Provider>;
+  return (
+    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+  );
 };
 
-export const useUser = () => useContext(User);
+// Custom 'Consumer'-hook of/for the created context to make user from 
+// userContext available in other components
+export const useUser = () => useContext(UserContext);
 
+// Custom hook that fetches user data and manages the state of the user. 
+// It returns the userState object, which contains the user data.
 export const useFetchUser = () => {
-    const [data, setUser] = useState({
-        user: userState || null,
-        loading: userState === undefined,
-    });
-    useEffect(() => {
-        if (userState !== undefined) {
-            return;
-        }
+  const [userState, setUserState] = useState({
+    user: null,
+  });
 
-        let isMounted = true;
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = getUserFromLocalCookie();
+      setUserState({ user });
+    };
 
-        const user = getUserFromLocalCookie();
-        if (isMounted) {
-            setUser({ user, loading: false });
-        }
+    fetchUser();
+  }, []);
 
-        return () => {
-            isMounted = false;
-        };
-    }, []);
-
-    return data;
+  return userState;
 };

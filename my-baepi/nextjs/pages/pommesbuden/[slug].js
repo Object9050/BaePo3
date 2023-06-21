@@ -15,6 +15,7 @@ export async function getServerSideProps({ req, params }) {
     typeof window !== "undefined"
       ? getTokenFromLocalCookie
       : getTokenFromServerCookie(req);
+
   const { slug } = params;
   const pommesResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden/${slug}?populate=*`,
@@ -26,9 +27,11 @@ export async function getServerSideProps({ req, params }) {
         }
       : ""
   );
+
   const description = await markdownToHtml(
     pommesResponse.data.attributes.description
   );
+
   return {
     props: {
       pommes: pommesResponse.data,
@@ -39,11 +42,9 @@ export async function getServerSideProps({ req, params }) {
   };
 }
 
-export default Pommesbude;
-
 const Pommesbude = ({ pommes, jwt, description, photos }) => {
   const router = useRouter();
-  const { user, loading } = useFetchUser();
+  const { user } = useFetchUser();
   const [review, setReview] = useState({
     value: "",
   });
@@ -82,6 +83,7 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
           {pommes.attributes.title}
         </span>
       </h1>
+
       {photos ? (
         <div>
           {photos.map((photo) => (
@@ -92,38 +94,62 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
             />
           ))}
         </div>
-      ): <div>Keine Fotos vorhanden</div>}
+      ) : (
+        <div>Keine Fotos vorhanden</div>
+      )}
+
       <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
           Beschreibung
         </span>
       </h2>
+
       <div
         className="font-normal text-sm"
         dangerouslySetInnerHTML={{ __html: description }}
       ></div>
+
+      {/* Display address and Google Maps link */}
+      {pommes.attributes.address && (
+        <div>
+          <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
+              Adresse
+            </span>
+          </h2>
+          <div className="font-normal text-sm">
+            <a
+              href={pommes.attributes.gmaps}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {pommes.attributes.address}
+            </a>
+          </div>
+        </div>
+      )}
       {user && (
         <>
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tighter mb-4 mt-4">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 py-2">
               Bewertungen
             </span>
-            <form onSubmit={handleSubmit}>
-              <textarea
-                className="w-full text-sm px-3 py-2 text-gray-700 border border-2 border-orange-400 rounded-lg focus:outline-none"
-                rows="4"
-                value={review.value}
-                onChange={handleChange}
-                placeholder="Füge deine Bewertung hinzu"
-              ></textarea>
-              <button
-                className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
-                type="submit"
-              >
-                Bewertung hinzufügen
-              </button>
-            </form>
           </h2>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              className="w-full text-sm px-3 py-2 text-gray-700 border border-2 border-orange-400 rounded-lg focus:outline-none"
+              rows="3"
+              value={review.value}
+              onChange={handleChange}
+              placeholder="Füge deine Bewertung hinzu"
+            ></textarea>
+            <button
+              className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2 mb-4"
+              type="submit"
+            >
+              Bewertung hinzufügen
+            </button>
+          </form>
           <ul>
             {pommes.attributes.reviews.data.length === 0 && (
               <span>Noch keine Bewertungen vorhanden.</span>
@@ -146,3 +172,4 @@ const Pommesbude = ({ pommes, jwt, description, photos }) => {
   );
 };
 
+export default Pommesbude;

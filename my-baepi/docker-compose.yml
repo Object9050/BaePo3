@@ -1,9 +1,9 @@
 version: "3"
 services:
   strapi:
-    container_name: strapi
+    container_name: strapiBackend
     build: .
-    image: strapi:latest
+    image: strapi4baepo:latest
     restart: unless-stopped
     env_file: .env
     environment:
@@ -32,7 +32,7 @@ services:
       - strapiDB
 
   strapiDB:
-    container_name: strapiDB
+    container_name: strapiDataBase
     platform: linux/amd64 #for platform error on Apple M1 chips
     restart: unless-stopped
     env_file: .env
@@ -52,7 +52,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:7
-    container_name: pgadmin-strapi
+    container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: digga@tutamail.com
       PGADMIN_DEFAULT_PASSWORD: pgAdmin
@@ -61,16 +61,17 @@ services:
     networks:
       - strapi
 #Zu Production wieder reinkommentieren:
-  # nextjs:
-  #   container_name: nextjs
-  #   build: ./nextjs
-  #   restart: unless-stopped
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./nextjs:/opt/app
-  #   networks:
-  #     - strapi 
+  nextjs:
+    container_name: nextjs
+    build: ./nextjs
+    image: nextjs-baepo
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./nextjs:/opt/app
+    networks:
+      - strapi 
 
 volumes:
   strapi-data:

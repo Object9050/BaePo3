@@ -2,7 +2,7 @@ import { useFetchUser } from "../lib/authContext";
 import Layout from "../components/Layout";
 
 const Profile = () => {
-  const { user, loading } = useFetchUser();
+  const { user } = useFetchUser();
 
   return (
     <Layout user={user}>
