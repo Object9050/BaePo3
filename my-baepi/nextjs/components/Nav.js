@@ -65,7 +65,7 @@ const Nav = () => {
         <Link href="/" passHref>
           <img
             className="m-3"
-            src="/logo.png"
+            src="/logo2.png"
             width={100}
             height={50}
             alt="BaePo Logo"
@@ -101,14 +101,14 @@ const Nav = () => {
           "
         >
           <li>
-            <Link href="/" className="md:p-2 py-2 block hover:text-orange-400">
+            <Link href="/" className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400">
               Home
             </Link>
           </li>
           <li>
             <Link
               href="/pommesbuden"
-              className="md:p-2 py-2 block hover:text-orange-400"
+              className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
             >
               Pommesbuden
             </Link>
@@ -119,7 +119,7 @@ const Nav = () => {
             <li>
               <Link
                 href="/profile"
-                className="md:p-2 py-2 block hover:text-orange-400"
+                className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
               >
                 Profil
               </Link>
@@ -132,7 +132,7 @@ const Nav = () => {
           {user ? (
             <li>
               <a
-                className="md:p-2 py-2 block hover:text-orange-400"
+                className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
                 onClick={logout}
                 style={{ cursor: "pointer" }}
               >
@@ -166,7 +166,7 @@ const Nav = () => {
                   />
 
                   <button
-                    className="md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
+                    className="text-xl font-medium md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
                     type="submit"
                   >
                     Login
@@ -176,7 +176,7 @@ const Nav = () => {
               <li>
                 <Link
                   href="/register"
-                  className="md:p-2 py-2 block hover:text-orange-400 text-black"
+                  className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400 text-black"
                 >
                   Registrieren
                 </Link>
