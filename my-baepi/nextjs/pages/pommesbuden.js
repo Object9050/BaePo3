@@ -37,7 +37,7 @@ const PommesList = ({ pommes2 }) => {
   );
   return (
     <Layout user={user}>
-      <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-4 mt-4">
+      <h1 className="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tighter mb-4 mt-4">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-400 py-2">
           Pommesbuden
         </span>
@@ -67,7 +67,7 @@ const PommesList = ({ pommes2 }) => {
           Weiter
         </button>
         <span>
-          {`${pageIndex} von ${data && data.meta.pagination.pageCount}`}
+          {`${pageIndex} / ${data && data.meta.pagination.pageCount}`}
         </span>
       </div>
     </Layout>
