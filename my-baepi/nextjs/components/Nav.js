@@ -3,11 +3,13 @@ import { useState } from "react";
 import { setToken, unsetToken } from "../lib/auth";
 import { fetcher } from "../lib/api";
 import { useUser } from "../lib/authContext";
+import { MenuHelper } from "../lib/menuHelper";
 
 const Nav = () => {
   // React hook 'useState' declares variable 'credentials', initialises
-  // it with empty username (identifier) and password. Also creates 
+  // it with empty username (identifier) and password. Also creates
   // 'setCredentials' function which enables later 'credentials' alteration.
+  const { isMenuOpen, toggleMenu } = MenuHelper();
   const [credentials, setCredentials] = useState({
     identifier: "",
     password: "",
@@ -57,18 +59,17 @@ const Nav = () => {
         py-4
         md:py-0
         px-4
-        text-lg text-gray-700
+        text-md
+        md:text-lg 
+        text-black
         bg-white
       "
     >
       <div>
         <Link href="/" passHref>
-          <img
-            className="m-3"
+          <img className="w-24 md:w-36 m-3"
             src="/logo2.png"
-            width={100}
-            height={50}
-            alt="BaePo Logo"
+            alt="BæPo Logo"
           />
         </Link>
       </div>
@@ -79,6 +80,7 @@ const Nav = () => {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        onClick={toggleMenu}
       >
         <path
           strokeLinecap="round"
@@ -88,27 +90,32 @@ const Nav = () => {
         />
       </svg>
       <div
-        className="hidden w-full md:flex md:items-center md:w-auto"
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } w-full md:flex md:items-center md:w-auto`}
         id="menu"
       >
         <ul
           className="
             pt-4
-            text-base text-gray-700
+            text-base text-black
             md:flex
             md:justify-between
             md:pt-0 space-x-2
           "
         >
           <li>
-            <Link href="/" className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400">
+            <Link
+              href="/"
+              className="text-lg md:text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
+            >
               Home
             </Link>
           </li>
           <li>
             <Link
               href="/pommesbuden"
-              className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
+              className="text-lg md:text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
             >
               Pommesbuden
             </Link>
@@ -119,7 +126,7 @@ const Nav = () => {
             <li>
               <Link
                 href="/profile"
-                className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
+                className="text-lg md:text-xl font-medium md:p- py-2 block hover:text-orange-400"
               >
                 Profil
               </Link>
@@ -132,7 +139,7 @@ const Nav = () => {
           {user ? (
             <li>
               <a
-                className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
+                className="text-lg md:text-xl font-medium md:p-2 py-2 block hover:text-orange-400"
                 onClick={logout}
                 style={{ cursor: "pointer" }}
               >
@@ -166,7 +173,7 @@ const Nav = () => {
                   />
 
                   <button
-                    className="text-xl font-medium md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
+                    className="text-lg md:text-xl font-medium md:p-2 rounded py-2 text-black bg-yellow-300 p-2"
                     type="submit"
                   >
                     Login
@@ -176,7 +183,7 @@ const Nav = () => {
               <li>
                 <Link
                   href="/register"
-                  className="text-xl font-medium md:p-2 py-2 block hover:text-orange-400 text-black"
+                  className="text-lg md:text-xl font-medium md:p-2 py-2 block hover:text-orange-400 text-black"
                 >
                   Registrieren
                 </Link>
