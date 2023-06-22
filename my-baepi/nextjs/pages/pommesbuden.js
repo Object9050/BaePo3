@@ -10,7 +10,7 @@ import { useFetchUser } from "../lib/authContext";
 // is requested by users.
 export async function getStaticProps() {
   const pommesResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=1&pagination[pageSize]=2`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/pommesbuden?pagination[page]=1&pagination[pageSize]=3&sort=title:ASC`
   );
   return {
     props: {

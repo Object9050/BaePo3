@@ -7,7 +7,7 @@ const Layout = ({ user, children }) => {
   return (
     <UserProvider value={{ user }}>
       <Head>
-        <title>BaePo - Baest Pommes in Town!</title>
+        <title>BæPo - Bæst Pommes in Town!</title>
       </Head>
 
       <div className="flex flex-col min-h-screen">
