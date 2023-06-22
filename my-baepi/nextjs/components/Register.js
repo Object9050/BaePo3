@@ -29,7 +29,6 @@ const Register = () => {
         }
       );
       setToken(responseData);
-      router.redirect('/profile');
     } catch (error) {
       console.error(error);
     }
@@ -87,7 +86,7 @@ const Register = () => {
               required
             />
           </div>
-          <button
+          <button onClick={() => router.push('/profile')}
             className="block bg-orange-400 text-lg rounded p-4 mx-auto"
             type="submit"
           >
